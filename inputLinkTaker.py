@@ -14,12 +14,16 @@ def home():
 
 @app.route('/submit')
 def query():
+
     link = request.args.get("link")
     youtubeVid = pytube.YouTube(link)
-    title=youtubeVid.title
-    video = youtubeVid.streams.filter(only_audio=True).all()
-    video[0].download()
-    return '''<h1>The language value is: {}</h1>'''.format(title)
+    en_caption = youtubeVid.captions.get_by_language_code('en')
+    en_caption_convert_to_srt = (en_caption.generate_srt_captions())
+    caption_file = open("Captions.text", "w")
+    caption_file.write(en_caption_convert_to_srt)
+    caption_file.close()
+
+    return '''<h1>The language value is: {}</h1>'''.format(link)
 
 
 app.run()
