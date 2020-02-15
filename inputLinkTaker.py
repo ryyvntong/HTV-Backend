@@ -22,8 +22,9 @@ def query():
     caption_file = open("Captions.text", "w")
     caption_file.write(en_caption_convert_to_srt)
     caption_file.close()
-
     return '''<h1>The language value is: {}</h1>'''.format(link)
+
+
 
 
 app.run()
