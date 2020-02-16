@@ -1,7 +1,7 @@
 import flask
 from youtube_transcript_api import YouTubeTranscriptApi
 import os
-from flask import request, jsonify, send_from_directory,abort
+from flask import request, jsonify, send_file,abort
 import numpy as np
 from fpdf import FPDF
 
@@ -11,7 +11,7 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return send_from_directory(directory="/", filename='tuto2.pdf')
+    return send_file('tuto2.pdf', as_attachment=True)
 
 
 @app.route('/file')
