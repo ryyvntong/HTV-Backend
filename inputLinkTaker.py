@@ -14,6 +14,15 @@ def home():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
 
+@app.route('/pdf')
+def note():
+
+    try:
+        return send_from_directory(directory="/", filename='tuto2.pdf')
+    except FileNotFoundError:
+        abort(404)
+
+
 @app.route('/submit')
 def query():
     outputTimes = []
@@ -30,14 +39,6 @@ def query():
     f.close()
     return jsonify(outputTimes)
 
-
-@app.route('/pdf')
-def note():
-
-    try:
-        return send_from_directory(directory="/", filename='tuto2.pdf')
-    except FileNotFoundError:
-        abort(404)
 
 
 if __name__=="main":
