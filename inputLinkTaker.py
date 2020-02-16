@@ -27,5 +27,5 @@ def query():
     print(outputTimes)
     return jsonify((outputTimes))
 
-
-app.run()
+if __name__=="main":
+    app.run()
