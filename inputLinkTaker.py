@@ -1,7 +1,7 @@
 import flask
 from youtube_transcript_api import YouTubeTranscriptApi
 import os
-from flask import request, jsonify
+from flask import request, jsonify, send_from_directory
 import numpy as np
 from fpdf import FPDF
 
@@ -88,13 +88,15 @@ def note():
             self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
 
     # Instantiation of inherited class
-    pdf = PDF()
-    pdf.alias_nb_pages()
-    pdf.add_page()
-    pdf.set_font('Times', '', 12)
-    for j in range(len(lst4)):
-        pdf.cell(0, 10, lst4[j], 0, 1)
-    pdf.output('tuto2.pdf', 'F')
+            pdf = PDF()
+            pdf.alias_nb_pages()
+            pdf.add_page()
+            pdf.set_font('Times', '', 12)
+            for j in range(len(lst4)):
+                pdf.cell(0, 10, lst4[j], 0, 1)
+            pdf.output('tuto2.pdf', 'F')
+
+            return send_from_directory(directory="/", filename='tuto2.pdf')
 
 
 if __name__=="main":
