@@ -16,10 +16,8 @@ def home():
 
 @app.route('/file')
 def note():
-     try:
-        return send_from_directory(directory="/", filename='tuto2.pdf')
-    except FileNotFoundError:
-        abort(404)
+    return send_from_directory(directory="/", filename='tuto2.pdf')
+
 
 
 @app.route('/submit')
