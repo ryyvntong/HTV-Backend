@@ -14,6 +14,27 @@ infile = open("Captions.text", "r")
 content = infile.readlines()
 infile.close()
 
+lst = []
+content = content[0].split(",")
+for entry in content:
+    if 'text' in entry:
+        strip = entry.strip()
+        lst.append(strip)
+
+lst2 = []
+for entry in lst:
+    strip = entry.strip("{'text': ")
+    lst2.append(strip)
+
+lst3 = []
+for entry in lst2:
+    strip = entry.strip("[{'text': '[Music]")
+    lst3.append(strip)
+
+lst4 = []
+for entry in lst3:
+    strip = entry.strip("Appla")
+    lst4.append(strip)
 
 class PDF(FPDF):
     def header(self):
@@ -41,8 +62,6 @@ pdf = PDF()
 pdf.alias_nb_pages()
 pdf.add_page()
 pdf.set_font('Times', '', 12)
-for i in range(1, 41):
-    pdf.cell(0, 10, content[0] + str(i), 0, 1)
+for j in range(len(lst4)):
+    pdf.cell(0, 10, lst4[j], 0, 1)
 pdf.output('tuto2.pdf', 'F')
-
-print(content[0])
