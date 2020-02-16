@@ -32,7 +32,6 @@ def query():
 
 @app.route("/pdf")
 def note():
-    return send_from_directory(directory="/", filename='tuto2.pdf')
     f = open("Captions.text", "r")
     line1 = f.read()
     data = line1.splitlines()
