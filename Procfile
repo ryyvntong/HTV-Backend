@@ -1,1 +1,1 @@
-web: inputLinkTaker.py
+web: gunicorn inputLinkTaker:app
