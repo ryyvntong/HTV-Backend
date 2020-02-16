@@ -1,8 +1,9 @@
 import flask
-import pytube
+from youtube_transcript_api import YouTubeTranscriptApi
 import os
-from moviepy.editor import *
-from flask import request
+from flask import request, jsonify
+import numpy as np
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -14,15 +15,18 @@ def home():
 
 @app.route('/submit')
 def query():
-
+    outputTimes=[]
     link = request.args.get("link")
-    youtubeVid = pytube.YouTube(link)
-    en_caption = youtubeVid.captions.get_by_language_code('en')
-    en_caption_convert_to_srt = (en_caption.generate_srt_captions())
-    caption_file = open("Captions.text", "w")
-    caption_file.write(en_caption_convert_to_srt)
-    caption_file.close()
-    return '''<h1>The language value is: {}</h1>'''.format(link)
+    searchTerm= request.args.get("search")
+    link = link.split("v=")[1]
+    captions= YouTubeTranscriptApi.get_transcript(link)
+    for i in captions:
+        if searchTerm in i["text"]:
+            outputTimes.append(i['start'])
+
+
+    print(outputTimes)
+    return jsonify((outputTimes))
 
 
 
