@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT inputLinkTaker:app
+web: gunicorn --bind 0.0.0.0:$PORT inputLinkTaker:app
