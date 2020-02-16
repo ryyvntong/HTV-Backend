@@ -32,6 +32,7 @@ def query():
 
 @app.route("/pdf")
 def note():
+    return send_from_directory(directory="/", filename='tuto2.pdf')
     f = open("Captions.text", "r")
     line1 = f.read()
     data = line1.splitlines()
@@ -77,8 +78,7 @@ def note():
             self.cell(30, 10, 'Note it', 1, 0, 'C')
             # Line break
             self.ln(20)
-
-        # Page footer
+       # Page footer
         def footer(self):
             # Position at 1.5 cm from bottom
             self.set_y(-15)
@@ -86,17 +86,16 @@ def note():
             self.set_font('Arial', 'I', 8)
             # Page number
             self.cell(0, 10, 'Page ' + str(self.page_no()) + '/{nb}', 0, 0, 'C')
-
     # Instantiation of inherited class
-            pdf = PDF()
-            pdf.alias_nb_pages()
-            pdf.add_page()
-            pdf.set_font('Times', '', 12)
-            for j in range(len(lst4)):
-                pdf.cell(0, 10, lst4[j], 0, 1)
-            pdf.output('tuto2.pdf', 'F')
+    pdf = PDF()
+    pdf.alias_nb_pages()
+    pdf.add_page()
+    pdf.set_font('Times', '', 12)
+    for j in range(len(lst4)):
+        pdf.cell(0, 10, lst4[j], 0, 1)
+        pdf.output('tuto2.pdf', 'F')
 
-            return send_from_directory(directory="/", filename='tuto2.pdf')
+    return send_from_directory(directory="/", filename='tuto2.pdf')
 
 
 if __name__=="main":
