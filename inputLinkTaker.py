@@ -25,7 +25,7 @@ def query():
         if searchTerm in i["text"]:
             outputTimes.append(i['start'])
 
-    f=open("captions.text","w")
+    f=open("Captions.text", "w")
     f.write(str(captions))
     f.close()
     return jsonify((outputTimes))
