@@ -11,12 +11,12 @@ app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return send_file('tuto2.pdf', as_attachment=True)
+    return "<h1>We've been deployed!</p>"
 
 
 @app.route('/file')
 def note():
-    return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading ofe fiction novels.</p>"
+    return send_file('tuto2.pdf', as_attachment=True)
 
 
 @app.route('/submit')
